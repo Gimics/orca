@@ -39,6 +39,7 @@ export function AutomationListSearchField({
       <input
         ref={inputRef}
         type="text"
+        autoFocus
         value={query}
         aria-label={translate(
           'auto.components.automations.AutomationListSearchField.label',
