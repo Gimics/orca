@@ -1590,6 +1590,8 @@ type ProviderBufferAcquisition = {
 
 type RuntimeTerminalBufferSnapshot = {
   data: string
+  /** Live state that can be restored without an alternate-screen frame. */
+  frameRestoreAnsi?: string
   cols: number
   rows: number
   seq?: number
@@ -11021,6 +11023,7 @@ export class OrcaRuntimeService {
     opts: { scrollbackRows?: number } = {}
   ): Promise<{
     data: string
+    frameRestoreAnsi?: string
     cols: number
     rows: number
     seq?: number
@@ -11039,6 +11042,7 @@ export class OrcaRuntimeService {
     opts: { scrollbackRows?: number } = {}
   ): Promise<{
     data: string
+    frameRestoreAnsi?: string
     cols: number
     rows: number
     cwd?: string | null
@@ -11489,6 +11493,7 @@ export class OrcaRuntimeService {
     opts: { scrollbackRows?: number } = {}
   ): Promise<{
     data: string
+    frameRestoreAnsi?: string
     cols: number
     rows: number
     cwd?: string | null
@@ -11539,6 +11544,7 @@ export class OrcaRuntimeService {
     opts: { scrollbackRows?: number } = {}
   ): Promise<{
     data: string
+    frameRestoreAnsi?: string
     cols: number
     rows: number
     seq?: number
@@ -11959,6 +11965,7 @@ export class OrcaRuntimeService {
     return data.length > 0 || opts.includeEmpty === true
       ? this.preferTrackedLastTitle(ptyId, {
           data,
+          frameRestoreAnsi: snapshot.frameRestoreAnsi,
           cols: snapshot.cols,
           rows: snapshot.rows,
           cwd: snapshot.cwd ?? this.terminalCwdByPtyId.get(ptyId),
